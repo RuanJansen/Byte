@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.byte_login);
         getLogin();
-        chechLogin();
+        checkLogin();
 
         btnNext = (Button)findViewById(R.id.btnNext);
         textviewRegister = (TextView)findViewById(R.id.textviewRegester);
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity  {
         password = (EditText)findViewById(R.id.edtPassword);
      }
 
-     public void chechLogin(){
+     public void checkLogin(){
          //System.out.println(email+" "+password);
      }
 
