@@ -1,4 +1,5 @@
 package com.example.abyte;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -19,12 +20,16 @@ public class LoginActivity extends AppCompatActivity  {
 
         btnNext = (Button)findViewById(R.id.btnNext);
         textviewRegister = (TextView)findViewById(R.id.textviewRegester);
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //System.out.println("click");
+                Intent myIntent = new Intent(view.getContext(), RestaurantActivity.class);
+                startActivityForResult(myIntent, 0);
             }
         });
+
         textviewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,11 +46,4 @@ public class LoginActivity extends AppCompatActivity  {
      public void checkLogin(){
          //System.out.println(email+" "+password);
      }
-
-
-
-
-
-
-
 }
