@@ -1,21 +1,15 @@
 package com.example.bytev2;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ImageView imgCash = (ImageView) findViewById(R.id.imgCash);
-//        imgCash.setBackgroundColor(Color.WHITE);
         setContentView(R.layout.byte_payment);
         Button btnConfirm;
         btnConfirm = (Button) findViewById(R.id.btnConfirm);
@@ -26,11 +20,10 @@ public class PaymentActivity extends AppCompatActivity {
         rbCash = (RadioButton) findViewById(R.id.rbCash);
         CheckBox cbSave;
         cbSave = (CheckBox) findViewById(R.id.cbSave);
-
+        cbSave.setEnabled(false);
         ClearPaypal();
         ClearVisa();
         ClearCash();
-
         rbPaypal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,41 +34,35 @@ public class PaymentActivity extends AppCompatActivity {
                 edtEmail = (EditText) findViewById(R.id.edtEmail);
                 edtEmail.setEnabled(true);
                 btnConfirm.setEnabled(true);
+                cbSave.setEnabled(true);
             }
         });
-
         rbVisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClearPaypal();
                 ClearCash();
-
                 EditText edtCardNum;
                 edtCardNum = (EditText) findViewById(R.id.edtCardNum);
                 edtCardNum.setEnabled(true);
-
                 EditText edtCVV;
                 edtCVV = (EditText) findViewById(R.id.edtCVV);
                 edtCVV.setEnabled(true);
-
                 EditText edtDate;
                 edtDate = (EditText) findViewById(R.id.edtDate);
                 edtDate.setEnabled(true);
-
                 btnConfirm.setEnabled(true);
+                cbSave.setEnabled(true);
             }
         });
-
         rbCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClearPaypal();
                 ClearVisa();
                 btnConfirm.setEnabled(true);
-
-                RadioButton rbCash;
-                rbCash = (RadioButton) findViewById(R.id.rbCash);
-                rbCash.setChecked(true);
+                cbSave.setChecked(false);
+                cbSave.setEnabled(false);
             }
         });
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +80,11 @@ public class PaymentActivity extends AppCompatActivity {
                         System.out.println("blank fields Paypal");
                     }
                 }
-
+                if (rbCash.isChecked()) {
+                    cbSave.setEnabled(false);
+                    Intent myIntent = new Intent(view.getContext(), NotificationActivity.class);
+                    startActivityForResult(myIntent, 0);
+                }
                 if (rbVisa.isChecked()) {
                     if(checkVisa()){
                         if(cbSave.isChecked()){
@@ -106,9 +97,7 @@ public class PaymentActivity extends AppCompatActivity {
                         System.out.println("blank fields Visa");
                     }
                 }
-
             }
-
             private boolean checkVisa() {
                 String blank = "";
                 boolean check1=true,check2=true,check3=true;
@@ -121,7 +110,6 @@ public class PaymentActivity extends AppCompatActivity {
                 String CardNum= String.valueOf(edtCardNum.getText());
                 String CVV= String.valueOf(edtCVV.getText());
                 String Date= String.valueOf(edtDate.getText());
-                System.out.println(CardNum.equals(blank));
                 if (CardNum.equals(blank)) {
                     check1 = false;
                 }
@@ -151,14 +139,14 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void savePaymentDetails() {
-        EditText edtCardNum;
-        edtCardNum = (EditText) findViewById(R.id.edtCardNum);
-
-        EditText edtDate;
-        edtDate = (EditText) findViewById(R.id.edtDate);
-
-        EditText edtEmail;
-        edtEmail = (EditText) findViewById(R.id.edtEmail);
+//        EditText edtCardNum;
+//        edtCardNum = (EditText) findViewById(R.id.edtCardNum);
+//
+//        EditText edtDate;
+//        edtDate = (EditText) findViewById(R.id.edtDate);
+//
+//        EditText edtEmail;
+//        edtEmail = (EditText) findViewById(R.id.edtEmail);
     }
 
     private void ClearCash() {

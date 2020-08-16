@@ -11,7 +11,8 @@
         android:id="@+id/textView4"
         android:layout_width="361dp"
         android:layout_height="56dp"
-        android:text="Estimated Collection Time"
+        android:gravity="center"
+        android:text="Collect in..."
         android:textColor="#F23B5F"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +37,7 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textviewTimer"
         android:layout_width="254dp"
         android:layout_height="139dp"
         android:text="00:00"

@@ -37,10 +37,11 @@
         app:layout_constraintVertical_bias="0.283" />
 
     <Spinner
+        android:textAlignment="center"
         android:id="@+id/spnrRestaurants"
         android:layout_width="390dp"
         android:layout_height="45dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/spinner_rounded_corners"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,5 +69,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="24dp"
+        android:layout_height="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386"
+        app:srcCompat="@drawable/spinnerdown" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

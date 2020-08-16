@@ -76,6 +76,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+        android:onClick="onButtonClick"
         android:id="@+id/btnConfirm"
         android:layout_width="390dp"
         android:layout_height="60dp"
@@ -95,6 +96,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
