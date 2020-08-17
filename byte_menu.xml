@@ -20,46 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tlMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollviewMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textviewMenu"
-        app:layout_constraintVertical_bias="1.0"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:tabTextColor="#F23B5F">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tiBeverage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onBeverageClick"
-            android:text="Beverages" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tiMeal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onMealClick"
-            android:text="Meals" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tiOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onOtherClick"
-            android:text="Other" />
-    </com.google.android.material.tabs.TabLayout>
-
     <ScrollView
         android:id="@+id/scrollviewMenu"
-        android:layout_width="412dp"
-        android:layout_height="465dp"
+        android:layout_width="411dp"
+        android:layout_height="429dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,6 +52,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
             </TableLayout>
 
         </LinearLayout>
@@ -112,4 +77,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnBeverages"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:background="@drawable/spinner_rounded_corners"
+        android:text="Beverages"
+        android:textColor="#F23B5F"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
+
+    <Button
+        android:id="@+id/btnMeals"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:background="@drawable/spinner_rounded_corners"
+        android:text="Meals"
+        android:textColor="#F23B5F"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
+
+    <Button
+        android:id="@+id/btnOther"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:background="@drawable/spinner_rounded_corners"
+        android:text="Other"
+        android:textColor="#F23B5F"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

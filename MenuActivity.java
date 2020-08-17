@@ -34,144 +34,169 @@ import java.net.URL;
 
 public class MenuActivity extends AppCompatActivity {
     int iQty = 0;
-    Button btnCheckout;
+    Button btnCheckout, btnBeverages, btnMeals, btnOther;
     int tableSize;
     String[] itemName;
     String[] itemPrice;
     String[] itemURL;
     String[] itemType;
-
-    protected void onBeverageClick(View view){
-        System.out.println("tiBeverage");
-    }
-
-    protected void onMealClick(){
-        System.out.println("tiMeal");
-
-    }
-
-    protected void onOtherClick(){
-        System.out.println("tiOther");
-
-    }
-
-
-
-
+    String Catagory;
+    TableRow row[];
+    ImageView ImageviewItem[];
+    LinearLayout linlayVert1[];
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.byte_menu);
 
+        getJSON("http://192.168.0.131/BytePHP/Menu.php");
 
+        btnBeverages = (Button) findViewById(R.id.btnBeverages);
+        btnBeverages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("beverage");
+                Catagory = "beverage";
+                filterItems(Catagory);
+            }
+
+        });
+
+        btnMeals = (Button) findViewById(R.id.btnMeals);
+        btnMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //btnMeals.setBackgroundColor(Integer.parseInt("#03dac5"));
+                System.out.println("meal");
+                Catagory = "meal";
+                filterItems(Catagory);
+            }
+        });
+
+        btnOther = (Button) findViewById(R.id.btnOther);
+        btnOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("other");
+                Catagory = "other";
+                filterItems(Catagory);
+            }
+        });
 
         btnCheckout = (Button) findViewById(R.id.btnConfirm);
-        getJSON("http://192.168.0.131/BytePHP/Menu.php");
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), CheckoutActivity.class);
                 startActivityForResult(myIntent, 0);
             }
-
         });
     }
 
-    private void Dynamic() {
+    private void filterItems(String Catagory) {
+        System.out.println("reset");
         for (int i = 0; i < tableSize; i++) {
-            System.out.println(itemName[i]+" "+itemPrice[i]+" "+" "+itemType[i]+"\n");
-            TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(200, 100, 10.0f);
-            row.setLayoutParams(lp);
-
-//            TabLayout tlMenu = (TabLayout) findViewById(R.id.tlMenu);
-//            TabLayout.Tab tiBeverage = new TabLayout.Tab();
-//            tiBeverage.setText("Beverage");
-//            TabLayout.Tab tiMenu = new TabLayout.Tab();
-//            TabLayout.Tab tiOther = new TabLayout.Tab();
-
-            //TabItem tiOther = new TabItem(this);
-
-            TableLayout tablelayoutMenu = (TableLayout) findViewById(R.id.tablelayoutMenu);
-            TextView textviewItem = new TextView(this);
-            TextView textviewPrice = new TextView(this);
-            TextView textviewQty = new TextView(this);
-            ImageButton btnAdd = new ImageButton(this);
-            ImageButton btnSubtract = new ImageButton(this);
-            ImageView ImageviewItem = new ImageView(this);
-
-            LinearLayout linlayHori1 = new LinearLayout(this);
-            LinearLayout linlayVert1 = new LinearLayout(this);
-            LinearLayout linlayHori2 = new LinearLayout(this);
-            LinearLayout linlayVert2 = new LinearLayout(this);
-
-            textviewQty.setText(String.valueOf(iQty));
-            textviewQty.setTextSize(24);
-            textviewQty.setTextColor(Color.parseColor("#F23B5F"));
-            textviewQty.setGravity(Gravity.CENTER);
-            textviewQty.setId(i);
-
-            textviewItem.setText(itemName[i]);
-            textviewItem.setTextSize(30);
-            textviewItem.setTextColor(Color.parseColor("#F23B5F"));
-            textviewItem.setId(i);
-
-            textviewPrice.setText("R" + itemPrice[i]);
-            textviewPrice.setTextSize(24);
-            textviewPrice.setTextColor(Color.parseColor("#F23B5F"));
-            textviewPrice.setId(i);
-
-            linlayHori1.setOrientation(LinearLayout.HORIZONTAL);
-            linlayVert1.setOrientation(LinearLayout.VERTICAL);
-            linlayHori2.setOrientation(LinearLayout.HORIZONTAL);
-            linlayVert2.setOrientation(LinearLayout.VERTICAL);
-
-            Bitmap bMapAdd = BitmapFactory.decodeResource(getResources(), R.drawable.add);
-            Bitmap bMapScaleAdd = Bitmap.createScaledBitmap(bMapAdd, 100, 100, true);
-            btnAdd.setImageBitmap(bMapScaleAdd);
-            btnAdd.setBackgroundColor(Color.WHITE);
-            btnAdd.setId(i);
-
-            Bitmap bMapMinus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
-            Bitmap bMapScaleMinus = Bitmap.createScaledBitmap(bMapMinus, 100, 100, true);
-            btnSubtract.setImageBitmap(bMapScaleMinus);
-            btnSubtract.setBackgroundColor(Color.WHITE);
-            btnSubtract.setId(i);
-
-            Bitmap bMapItem = BitmapFactory.decodeResource(getResources(), R.drawable.byte_white);
-            Bitmap bMapScaleItem = Bitmap.createScaledBitmap(bMapItem, 600, 400, true);
-            ImageviewItem.setImageBitmap(bMapScaleItem);
-
-            row.addView(ImageviewItem);
-            row.addView(linlayVert1);
-            linlayVert1.addView(textviewItem);
-            linlayVert1.addView(linlayHori1);
-            linlayHori1.addView(textviewPrice);
-            linlayHori1.addView(linlayVert2);
-            linlayVert2.addView(textviewQty);
-            linlayVert2.addView(linlayHori2);
-            linlayHori2.addView(btnAdd);
-            linlayHori2.addView(btnSubtract);
-            tablelayoutMenu.addView(row, i);
-
-            btnAdd.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    iQty = Integer.parseInt((String) textviewQty.getText());
-                    iQty++;
-                    textviewQty.setText(String.valueOf(iQty));
-                }
-            });
-
-            btnSubtract.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    iQty = Integer.parseInt((String) textviewQty.getText());
-                    if (iQty > 0) {
-                        iQty--;
-                        textviewQty.setText(String.valueOf(iQty));
-                    }
-                }
-            });
+            System.out.println("in for");
+            if (!Catagory.equals(itemType[i])) {
+                row[i].setVisibility(View.GONE);
+            }else{
+                row[i].setVisibility(View.VISIBLE);
+            }
         }
     }
+
+    private void DynamicRows(){
+        row = new TableRow[tableSize];
+        ImageviewItem= new ImageView[tableSize];
+        linlayVert1 = new LinearLayout[tableSize];
+
+        for (int i = 0; i < tableSize; i++) {
+            row[i] = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(200, 100, 10.0f);
+                row[i].setLayoutParams(lp);
+
+                TableLayout tablelayoutMenu = (TableLayout) findViewById(R.id.tablelayoutMenu);
+                TextView textviewItem = new TextView(this);
+                TextView textviewPrice = new TextView(this);
+                TextView textviewQty = new TextView(this);
+                ImageButton btnAdd = new ImageButton(this);
+                ImageButton btnSubtract = new ImageButton(this);
+                ImageviewItem[i] = new ImageView(this);
+
+                LinearLayout linlayHori1 = new LinearLayout(this);
+                linlayVert1[i] = new LinearLayout(this);
+                LinearLayout linlayHori2 = new LinearLayout(this);
+                LinearLayout linlayVert2 = new LinearLayout(this);
+
+                textviewQty.setText(String.valueOf(iQty));
+                textviewQty.setTextSize(24);
+                textviewQty.setTextColor(Color.parseColor("#F23B5F"));
+                textviewQty.setGravity(Gravity.CENTER);
+                textviewQty.setId(i);
+
+                textviewItem.setText(itemName[i]);
+                textviewItem.setTextSize(30);
+                textviewItem.setTextColor(Color.parseColor("#F23B5F"));
+                textviewItem.setId(i);
+
+                textviewPrice.setText("R" + itemPrice[i]);
+                textviewPrice.setTextSize(24);
+                textviewPrice.setTextColor(Color.parseColor("#F23B5F"));
+                textviewPrice.setId(i);
+
+                linlayHori1.setOrientation(LinearLayout.HORIZONTAL);
+                linlayVert1[i].setOrientation(LinearLayout.VERTICAL);
+                linlayHori2.setOrientation(LinearLayout.HORIZONTAL);
+                linlayVert2.setOrientation(LinearLayout.VERTICAL);
+
+                Bitmap bMapAdd = BitmapFactory.decodeResource(getResources(), R.drawable.add);
+                Bitmap bMapScaleAdd = Bitmap.createScaledBitmap(bMapAdd, 100, 100, true);
+                btnAdd.setImageBitmap(bMapScaleAdd);
+                btnAdd.setBackgroundColor(Color.WHITE);
+                btnAdd.setId(i);
+
+                Bitmap bMapMinus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                Bitmap bMapScaleMinus = Bitmap.createScaledBitmap(bMapMinus, 100, 100, true);
+                btnSubtract.setImageBitmap(bMapScaleMinus);
+                btnSubtract.setBackgroundColor(Color.WHITE);
+                btnSubtract.setId(i);
+
+                Bitmap bMapItem = BitmapFactory.decodeResource(getResources(), R.drawable.byte_white);
+                Bitmap bMapScaleItem = Bitmap.createScaledBitmap(bMapItem, 600, 400, true);
+                ImageviewItem[i].setImageBitmap(bMapScaleItem);
+
+                row[i].addView(ImageviewItem[i]);
+                row[i].addView(linlayVert1[i]);
+                row[i].setId(i);
+                linlayVert1[i].addView(textviewItem);
+                linlayVert1[i].addView(linlayHori1);
+                linlayHori1.addView(textviewPrice);
+                linlayHori1.addView(linlayVert2);
+                linlayVert2.addView(textviewQty);
+                linlayVert2.addView(linlayHori2);
+                linlayHori2.addView(btnAdd);
+                linlayHori2.addView(btnSubtract);
+                tablelayoutMenu.addView(row[i], i);
+
+                btnAdd.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        iQty = Integer.parseInt((String) textviewQty.getText());
+                        iQty++;
+                        textviewQty.setText(String.valueOf(iQty));
+                    }
+                });
+
+                btnSubtract.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        iQty = Integer.parseInt((String) textviewQty.getText());
+                        if (iQty > 0) {
+                            iQty--;
+                            textviewQty.setText(String.valueOf(iQty));
+                        }
+                    }
+                });
+            }
+
+        }
 
 
     private void getJSON(final String urlWebservice) {
@@ -188,7 +213,8 @@ public class MenuActivity extends AppCompatActivity {
                 try {
                     System.out.println(s);
                     loadIntoListView(s);
-                    Dynamic();
+                    Catagory="beverage";
+                    DynamicRows();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -217,6 +243,7 @@ public class MenuActivity extends AppCompatActivity {
         GetJSON getJSON = new GetJSON();
         getJSON.execute();
     }
+
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
         System.out.println(jsonArray.length());
